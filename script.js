@@ -3,7 +3,7 @@ const inputSize = document.querySelector('.input-size')
 const inputColor = document.querySelector('.input-color')
 const usedColors = document.querySelector('.used-colors')
 const buttonSave = document.querySelector('.button-save')
-const coloResize = document.querySelector('.resize')
+const colResize = document.querySelector('.resize')
 const main = document.querySelector('main')
 
 const MIN_CANVAS_SIZE = 4
@@ -61,11 +61,11 @@ const changeColor = () => {
   button.setAttribute('data-color', currentColor)
   button.addEventListener('click', () => (inputColor.value = currentColor))
 
-  const saveColors = Array.from(usedColors.childrem)
+  const savedColors = Array.from(usedColors.children)
 
   const check = btn => btn.getAttribute('data-color') != currentColor
 
-  if (saveColors.every(check)) {
+  if (savedColors.every(check)) {
     usedColors.append(button)
   }
 }
@@ -77,7 +77,7 @@ const resizeCanvas = cursorPositionX => {
   const width = `${cursorPositionX - canvasOffset - 20}px`
 
   canvas.style.maxWidth = width
-  coloResize.style.heigth = width
+  colResize.style.height = width
 }
 
 const saveCanvas = () => {
@@ -100,7 +100,7 @@ canvas.addEventListener('mouseup', () => (isPainting = false))
 inputSize.addEventListener('change', updateCanvasSize)
 inputColor.addEventListener('change', changeColor)
 
-coloResize.addEventListener('mouseup', () => (isResizing = false))
+colResize.addEventListener('mousedown', () => (isResizing = true))
 
 main.addEventListener('mouseup', () => (isResizing = false))
 main.addEventListener('mousemove', ({ clientX }) => resizeCanvas(clientX))
